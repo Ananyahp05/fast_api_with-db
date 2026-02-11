@@ -5,9 +5,19 @@ from routes.email_routes import router as email_router
 from db import get_db,DATABASE_URL
 from sqlalchemy import create_engine
 import os
+from fastapi.middleware.cors import CORSMiddleware
 from models import Base
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(user_router)
 app.include_router(ai_response_router)
