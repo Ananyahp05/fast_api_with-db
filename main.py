@@ -5,14 +5,22 @@ from routes.email_routes import router as email_router
 from db import get_db,DATABASE_URL
 from sqlalchemy import create_engine
 import os
+from fastapi.middleware.cors import CORSMiddleware
 from models import Base
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+<<<<<<< HEAD
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"], # Be explicit, don't use "*"
+=======
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+>>>>>>> 865c7c67240c1fb64f8c6408f67ce60541b3f180
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
