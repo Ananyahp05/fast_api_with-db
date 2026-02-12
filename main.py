@@ -5,23 +5,30 @@ from routes.email_routes import router as email_router
 from db import get_db,DATABASE_URL
 from sqlalchemy import create_engine
 import os
-from fastapi.middleware.cors import CORSMiddleware
 from models import Base
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# Explicitly allow both common Vite ports
+origins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"], # Be explicit, don't use "*"
+    allow_origins=origins, 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-
 )
 
+# Important: Ensure your routers are included correctly
 app.include_router(user_router)
-app.include_router(ai_response_router)
+app.include_router(ai_response_router) # This is your /ask route
 app.include_router(email_router)
 #to create database
 
