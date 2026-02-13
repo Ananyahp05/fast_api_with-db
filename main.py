@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 # Explicitly allow both common Vite ports
-allow_origins=["http://localhost:5173", "http://localhost:5174"]
+allow_origins=["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins, 
